@@ -7,7 +7,7 @@ $responseToAjax = array(
 );
 
 //check if session has not been started / not a valid user
-if(session_status() != PHP_SESSION_ACTIVE || !isset($_SESSION['username']) ) {
+if(session_status() != PHP_SESSION_ACTIVE || !isset($_SESSION['userid']) ) {
 	$responseToAjax["error"] = "Invalid user. Please log in.";
 	$responseToAjax["success"] = false;
 } 

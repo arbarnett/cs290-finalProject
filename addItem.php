@@ -7,7 +7,7 @@ $responseToAjax = array(
 );
 
 //check if session has not been started / not a valid user
-if(session_status() != PHP_SESSION_ACTIVE || !isset($_SESSION['username']) ) {
+if(session_status() != PHP_SESSION_ACTIVE || !isset($_SESSION['userid']) ) {
 	$responseToAjax["error"] = "Invalid user. Please log in.";
 	$responseToAjax["success"] = false;
 } 
@@ -30,8 +30,8 @@ else{
 			$responseToAjax["success"] = false;
 	} else {
 		
-		$addItem = $mysqli->prepare("INSERT INTO Groceries(name,unit,quantity) VALUES (?,?,?)"); 
-		$addItem->bind_param("ssd", $addName, $addUnit, $addQuantity);
+		$addItem = $mysqli->prepare("INSERT INTO Groceries(userId,name,unit,quantity) VALUES (?,?,?,?)"); 
+		$addItem->bind_param("issd", $_SESSION['userid'], $addName, $addUnit, $addQuantity);
 		$addItem->execute();
 		$addItem->close();
 	}

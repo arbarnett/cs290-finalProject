@@ -25,3 +25,6 @@ else{
 
 	}
 }
+
+//respond to request
+echo json_encode($responseToAjax);

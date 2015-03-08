@@ -29,14 +29,22 @@ else {
 		$user = $_GET["username"];
 		$pwd = $_GET["password"];
 
-		$s = $mysqli->prepare("SELECT username FROM Users WHERE username = ? AND password = ?");
+		$s = $mysqli->prepare("SELECT id FROM Users WHERE username = ? AND password = ?");
 		$s->bind_param("ss", $user, $pwd);
 		$s->execute();
-		$s->store_result();
 
-		if($s->num_rows >= 1) {
+		$result = $s->get_result();
+		$foundRow = false;
+		while ($row = $result->fetch_assoc()) {
+			$foundRow = true;
+        	$userID = $row['id'];
+        	break;
+  		}
+		$s->close();
+
+		if($foundRow) {
 			session_start();
-			$_SESSION['username'] = $user;
+			$_SESSION['userid'] = $userID;
 		} else {
 			$responseToAjax["error"] = "Not a valid username and/or password.";
 			$responseToAjax["success"] = false;

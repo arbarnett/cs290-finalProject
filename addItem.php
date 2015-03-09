@@ -18,6 +18,12 @@ else if (!isset($_GET["addName"]) || empty($_GET["addName"]) || !isset($_GET["ad
 	$responseToAjax["success"] = false;
 }
 
+//check if quantity is numeric
+else if (! is_numeric($_GET["addQuantity"]) || $_GET["addQuantity"]<0) {
+	$responseToAjax["error"] = "You must enter a valid number for Quantity.";
+	$responseToAjax["success"] = false;	
+}
+
 else{
 
 	$addName = $_GET["addName"];

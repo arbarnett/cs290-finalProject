@@ -1,7 +1,5 @@
--on add item: check if quantity is an integer
+
 
 -LAST: add an image for the grocery list, or upload profile picture
 
--Try to make an account with the same name (this should fail).
 
--Delete list: only items with their userid

@@ -1,4 +1,7 @@
 <?php
+error_reporting(-1);
+ini_set('display_errors', 'On');
+
 $responseToAjax = array(
 	"error" => null,
 	"success" => true
@@ -22,11 +25,38 @@ else {
 	if ($mysqli->connect_errno) {
 		$responseToAjax["error"] = "There was an issue connecting to the database:". $mysqli->connect_errno . ")" . $mysqli->connect_error;
 		$responseToAjax["success"] = false;
-	} else {
-		$addUser = $mysqli->prepare("INSERT INTO Users(username, password, name) VALUES (?,?,?)"); 
-		$addUser->bind_param("sss", $_GET["username"], $_GET["password"], $_GET["name"]);
-		$addUser->execute();
-		$addUser->close();
+	} 
+	else {
+		//see if username is already taken
+		$checkName = $mysqli->prepare("SELECT id FROM Users WHERE username= ?"); 
+		$checkName->bind_param("s", $_GET["username"]);
+		$checkName->execute();
+		$checkName->bind_result($result);
+		$checkName->fetch();
+
+		//if username is taken, send an error 
+		if ($result) {
+			$checkName->close();
+			$responseToAjax["error"] = "That username is already taken. Please enter a different username.";
+			$responseToAjax["success"] = false;
+		}
+
+		//if username is not taken, process username
+		else {
+			$checkName->close();
+
+			$mysqli = new mysqli("oniddb.cws.oregonstate.edu", "barnetal-db", "jVIV8TuG4g2sc4ER", "barnetal-db");
+			if ($mysqli->connect_errno) {
+				$responseToAjax["error"] = "There was an issue connecting to the database:". $mysqli->connect_errno . ")" . $mysqli->connect_error;
+				$responseToAjax["success"] = false;
+			} 
+			else {
+				$addUser = $mysqli->prepare("INSERT INTO Users(username, password, name) VALUES (?,?,?)"); 
+				$addUser->bind_param("sss", $_GET["username"], $_GET["password"], $_GET["name"]);
+				$addUser->execute();
+				$addUser->close();
+			}
+		}
 	}
 }
 

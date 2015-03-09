@@ -19,7 +19,7 @@ else{
 		$responseToAjax["success"] = false;
 	} else {
 
-	$deleteList = $mysqli->prepare("DELETE FROM Groceries"); 
+	$deleteList = $mysqli->prepare("DELETE FROM Groceries WHERE userId = '". $_SESSION['userid']."'");
 	$deleteList->execute();
 	$deleteList->close();
 

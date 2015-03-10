@@ -8,13 +8,13 @@ $responseToAjax = array(
 );
 
 //check for an empty username: NOT VALID
-if(!isset($_GET["username"]) || empty($_GET["username"])) {
+if(!isset($_POST["username"]) || empty($_POST["username"])) {
 	$responseToAjax["error"] = "Please enter a valid username.";
 	$responseToAjax["success"] = false;
 }
 
 //check for an empty password: NOT VALID
-else if (!isset($_GET["password"]) || empty($_GET["password"])) {
+else if (!isset($_POST["password"]) || empty($_POST["password"])) {
 	$responseToAjax["error"] = "Please enter a valid password.";
 	$responseToAjax["success"] = false;
 } 
@@ -26,8 +26,8 @@ else {
 		$responseToAjax["error"] = "There was an issue connecting to the database:". $mysqli->connect_errno . ")" . $mysqli->connect_error;
 		$responseToAjax["success"] = false;
 	} else {
-		$user = $_GET["username"];
-		$pwd = $_GET["password"];
+		$user = $_POST["username"];
+		$pwd = $_POST["password"];
 
 		$s = $mysqli->prepare("SELECT id FROM Users WHERE username = ? AND password = ?");
 		$s->bind_param("ss", $user, $pwd);

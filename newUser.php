@@ -8,13 +8,13 @@ $responseToAjax = array(
 	);
 
 //check for an empty username: NOT VALID
-if(empty($_GET["username"])) {
+if(empty($_POST["username"])) {
 	$responseToAjax["error"] = "Please enter a valid username.";
 	$responseToAjax["success"] = false;
 }
 
 //check for an empty password: NOT VALID
-else if (empty($_GET["password"])) {
+else if (empty($_POST["password"])) {
 	$responseToAjax["error"] = "Please enter a valid password.";
 	$responseToAjax["success"] = false;
 } 
@@ -29,7 +29,7 @@ else {
 	else {
 		//see if username is already taken
 		$checkName = $mysqli->prepare("SELECT id FROM Users WHERE username= ?"); 
-		$checkName->bind_param("s", $_GET["username"]);
+		$checkName->bind_param("s", $_POST["username"]);
 		$checkName->execute();
 		$checkName->bind_result($result);
 		$checkName->fetch();
@@ -52,7 +52,7 @@ else {
 			} 
 			else {
 				$addUser = $mysqli->prepare("INSERT INTO Users(username, password, name) VALUES (?,?,?)"); 
-				$addUser->bind_param("sss", $_GET["username"], $_GET["password"], $_GET["name"]);
+				$addUser->bind_param("sss", $_POST["username"], $_POST["password"], $_POST["name"]);
 				$addUser->execute();
 				$addUser->close();
 			}

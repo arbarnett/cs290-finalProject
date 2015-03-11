@@ -13,22 +13,22 @@ if(session_status() != PHP_SESSION_ACTIVE || !isset($_SESSION['userid']) ) {
 } 
 
 //check if all fields have been entered to add an item
-else if (!isset($_GET["addName"]) || empty($_GET["addName"]) || !isset($_GET["addUnit"]) || empty($_GET["addUnit"]) || !isset($_GET["addQuantity"]) || empty($_GET["addQuantity"])) {
+else if (!isset($_POST["addName"]) || empty($_POST["addName"]) || !isset($_POST["addUnit"]) || empty($_POST["addUnit"]) || !isset($_POST["addQuantity"]) || empty($_POST["addQuantity"])) {
 	$responseToAjax["error"] = "Please enter all fields for the item.";
 	$responseToAjax["success"] = false;
 }
 
 //check if quantity is numeric
-else if (! is_numeric($_GET["addQuantity"]) || $_GET["addQuantity"]<0) {
+else if (! is_numeric($_POST["addQuantity"]) || $_POST["addQuantity"]<0) {
 	$responseToAjax["error"] = "You must enter a valid number for Quantity.";
 	$responseToAjax["success"] = false;	
 }
 
 else{
 
-	$addName = $_GET["addName"];
-	$addUnit = $_GET["addUnit"];
-	$addQuantity = $_GET["addQuantity"];
+	$addName = $_POST["addName"];
+	$addUnit = $_POST["addUnit"];
+	$addQuantity = $_POST["addQuantity"];
 
 	$mysqli = new mysqli("oniddb.cws.oregonstate.edu", "barnetal-db", "jVIV8TuG4g2sc4ER", "barnetal-db");
 	if ($mysqli->connect_errno) {

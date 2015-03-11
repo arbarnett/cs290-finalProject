@@ -50,7 +50,7 @@ var bindNewUserSubmit = function() {
 		
 		//get rid of default behavior (submit form)
 		event.preventDefault();
-
+   
 		$.ajax({
 			type: "POST",
 			url: "newUser.php",

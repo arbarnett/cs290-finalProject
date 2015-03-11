@@ -2,6 +2,9 @@
 <html>
 <head>
 	<title>Grocery list</title>
+	<style>
+	.error-message{color: red;}
+	</style>
 </head>
 <body>
 	<div class= "float-right">
@@ -16,13 +19,14 @@
 
 	</div>
 
-	<div id="add-item">
+	<div id="add-item-content">
 		<h2>Need Something Else?</h2>
-		<form>
-		<input type="text" name="name" placeholder="item name"/>
-		<input type="text" name="unit" placeholder="unit"/>
-		<input type="text" name="quantity" placeholder="quantity needed"/>
+		<form id="add-item-form">
+		<input type="text" name="addName" placeholder="item name"/>
+		<input type="text" name="addUnit" placeholder="unit"/>
+		<input type="text" name="addQuantity" placeholder="quantity needed"/>
 		<input type="submit" value="submit"/>
+		<p class= "error-message"></p>
 		</form>
 	</div>
 

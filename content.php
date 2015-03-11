@@ -8,6 +8,8 @@
 
 	<div id="list-display">
 		<h2>Your List:</h2>
+	<?php include 'table.php';?>
+
 	</div>
 
 	<div id="add-item">
@@ -26,6 +28,6 @@
 		<input type="submit" value="Delete List"/>
 		</form>
 	</div>
-	
+
 </body>
 </html>

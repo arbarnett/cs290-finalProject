@@ -13,13 +13,13 @@ if(session_status() != PHP_SESSION_ACTIVE || !isset($_SESSION['userid']) ) {
 } 
 
 //check if an item has been selected to be deleted
-else if (!isset($_GET["deleteid"]) || empty($_GET["deleteid"])) {
+else if (!isset($_POST["deleteid"]) || empty($_POST["deleteid"])) {
 	$responseToAjax["error"] = "Please select an item to delete.";
 	$responseToAjax["success"] = false;
 }
 
 else {
-	$id = $_GET["deleteid"];
+	$id = $_POST["deleteid"];
 
 	$mysqli = new mysqli("oniddb.cws.oregonstate.edu", "barnetal-db", "jVIV8TuG4g2sc4ER", "barnetal-db");
 	if ($mysqli->connect_errno) {

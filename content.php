@@ -4,6 +4,10 @@
 	<title>Grocery list</title>
 </head>
 <body>
+	<div class= "float-right">
+		<a href="signInPage.html">Logout </a>
+	</div>
+
 	<h1>Hello,</h1>
 
 	<div id="list-display">
@@ -29,5 +33,7 @@
 		</form>
 	</div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="content.js"></script>
 </body>
 </html>

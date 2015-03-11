@@ -1,5 +1,9 @@
 
 
 -LAST: add an image for the grocery list, or upload profile picture
+-make sign in a php page so you can end session
 
+=finish content.js
+
+-css
 

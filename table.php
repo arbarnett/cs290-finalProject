@@ -22,14 +22,14 @@ if (!$mysqli->connect_errno && session_status() == PHP_SESSION_ACTIVE && isset($
 					"quantity" => $row[3]
 					);
 			}
-		}
 
-		//close the query
-		$result->close(); 
+			//close the query
+			$result->close();
+		}
 }	
 ?>
 
-<table id="grocery-list-table">
+<table id="grocery-list-table" class="table">
 	<thead>
 		<tr>
 			<th>Item</th>
@@ -46,7 +46,7 @@ if (!$mysqli->connect_errno && session_status() == PHP_SESSION_ACTIVE && isset($
 					<td><?= $row["name"]; ?></td>
 					<td><?= $row["unit"]; ?></td>
 					<td><?= $row["quantity"]; ?></td>
-					<td><button class="delete-item" value="<?= $row["id"]; ?>">Yup!</button></td>
+					<td><button class="delete-item btn btn-default" value="<?= $row["id"]; ?>">Yup!</button></td>
 				</tr>
 		<?php	
 			}

@@ -84,6 +84,34 @@ var bindAddItemSubmit = function(){
 	});
 };
 
+var bindDeleteAllClick = function() {
+	var $deleteListButton = $(".delete-list");
+
+	$deleteListButton.click(function(){
+		$.ajax({
+			type: "POST",
+			url: "deleteList.php",
+			dataType: "json",
+			success: function(data){
+
+				console.log(data);
+				
+				//handle any errors
+				if (data.success != true) {
+					alert(data.error);
+				} 
+				//if successful
+				else {
+					updateTable();
+				}
+			},
+			error: function(data){console.log(data)}
+		});			
+	});
+};
+
+
+
 $(document).ready(function(){
 
 //delete item button
@@ -93,6 +121,6 @@ bindDeleteItemClick();
 bindAddItemSubmit();
 
 //delete all button
-// bindDeleteAllClick();
+bindDeleteAllClick();
 
 });
